@@ -81,7 +81,7 @@
     width: 100%;
 }
 
-.ship.details {
+.ship.details, .craft.details {
     flex-basis: 50%;
     flex-grow: 1;
     flex-shrink: 0;
@@ -145,19 +145,19 @@ h4 {
     text-align: center;
 }
 
-.ship {
+.ship, .craft {
     border: 6px solid black;
 }
 
-.ship.selected {
+.ship.selected, .craft.selected {
     border: 6px solid orangered;
 }
 
-.ship:not(.selected) {
+/* .ship:not(.selected), craft.:not(.selected) {
     cursor: pointer;
-}
+} */
 
-.ship.details {
+.ship.details, .craft.details {
     cursor: unset;
 }
 
@@ -169,6 +169,10 @@ h4 {
 }
 
 .ship .summary {
+    display: flex;
+    flex-direction: row;
+}
+.craft .summary {
     display: flex;
     flex-direction: row;
 }
@@ -203,6 +207,13 @@ h4 {
     justify-content: flex-end;
     font-size: medium;
 }
+/* .craft .summary .stat {
+    display: none;
+    flex-basis: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    font-size: medium;
+} */
 
 .ship .summary .stat.crew-status {
     order: 1;
@@ -221,6 +232,27 @@ h4 {
     display: flex;
 }
 
+.craft .craft-image {
+    float: left;
+    width: 40px;
+    height: 40px;
+    margin-right: 0.5em;
+}
+
+/* .craft-image-details {
+    flex-basis: 50%;
+    align-self: center;
+} */
+.craft-image-details svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+.craft.details .craft-image-details {
+    flex-basis: 30%;
+    flex-grow: 0;
+    flex-shrink: 1;
+}
 
 .ship.details .summary {
     gap: 3%;
@@ -417,6 +449,40 @@ h4 {
     flex-basis: 40%;
     text-align: left;
 }
+
+/* .craft.details .summary {
+    gap: 3%;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.craft.details .summary .stats dl.basic-stats {
+    gap: 3%;
+}
+
+.craft.details .summary .stat {
+    flex-basis: 30%;
+    display: block;
+}
+
+.craft.details .summary .stat dt {
+    font-size: small;
+    margin-top: 0.5em;
+    margin-right: 0;
+    display: block;
+    text-align: left;
+}
+.craft.details .summary .stat dd {
+    font-size: xx-large;
+}
+.craft.details .stats dt::after {
+    content: unset;
+}
+.craft.details .stats {
+    flex-basis: 60%;
+    flex-grow: 0;
+    flex-shrink: 0;
+} */
 
 .own-line dt {
     flex-basis: 60%;

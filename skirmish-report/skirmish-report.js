@@ -29,7 +29,7 @@ function handleFileUpload(file) {
         const fragment = xsltProcessor.transformToFragment(xmlDoc, document);
         skirmishFrame.textContent = '';
         skirmishFrame.appendChild(fragment);
-        reportUi(fragment);
+        reportUi(fragment); //Doesn't accept any arguments ?
     }).catch(alert);
 }
 
@@ -84,14 +84,16 @@ function ui() {
 }
 
 function reportUi() {
-    const ships = document.querySelectorAll(".ship:not(.details)");
+    const ships = document.querySelectorAll(".ship:not(.details), .craft:not(.details)");
+
+    console.log(ships);
 
     ships.forEach((ship) => {
         ship.addEventListener("click", (e) => {
             ships.forEach((s) => s.classList.remove("selected"));
             ship.classList.add("selected");
 
-            const details = document.querySelectorAll(".ship.details");
+            const details = document.querySelectorAll(".ship.details, .craft.details");
             details.forEach((d) => {
                 if (d.dataset.shipId === ship.dataset.shipId) {
                     d.classList.remove("hidden");
