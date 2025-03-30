@@ -1237,6 +1237,7 @@
         <xsl:variable name="m30net">Stock/S3 Net Mine</xsl:variable>
         <xsl:variable name="m30sprint">Stock/S3 Sprint Mine</xsl:variable>
         <xsl:variable name="r2">Stock/S1 Rocket</xsl:variable>
+        <xsl:variable name="r3">Stock/S3 Rocket</xsl:variable>
         <xsl:variable name="p20">Stock/P20 Flak PDT</xsl:variable>
         <xsl:variable name="t30">Stock/T30 Cannon</xsl:variable>
         <xsl:variable name="te45">Stock/TE45 Mass Driver</xsl:variable>
@@ -1293,6 +1294,7 @@
                     <xsl:when test="$name = $m30net">resources/modules/m30.svg</xsl:when>
                     <xsl:when test="$name = $m30sprint">resources/modules/m30.svg</xsl:when>
                     <xsl:when test="$name = $r2">resources/modules/r2.svg</xsl:when>
+                    <xsl:when test="$name = $r3">resources/modules/r3.svg</xsl:when>
                     <xsl:when test="$name = $p20">resources/modules/p20.svg</xsl:when>
                     <xsl:when test="$name = $t30">resources/modules/t30.svg</xsl:when>
                     <xsl:when test="$name = $te45">resources/modules/te45.svg</xsl:when>
@@ -1476,25 +1478,173 @@
                 </xsl:attribute>
                 </img>
                 <div class="stats">
-                    <!-- <h2>
-                        [<xsl:value-of select="HullString"></xsl:value-of>]
-                        <xsl:text> </xsl:text>
-                        <xsl:value-of select="ShipName"></xsl:value-of>
+                    <h2>
+                        <xsl:value-of select="DesignName"></xsl:value-of>
                     </h2>
-                    <xsl:apply-templates select="." mode="elimination-status"></xsl:apply-templates>
-                    <xsl:apply-templates select="." mode="basic-stats"></xsl:apply-templates> -->
+                    <xsl:apply-templates select="." mode="basic-stats"></xsl:apply-templates>
                 </div>
                 <div class="stats">
-                    <!-- <xsl:apply-templates select="." mode="efficiency-ratings" /> -->
+                    <xsl:apply-templates select="." mode="efficiency-ratings" />
                 </div>
             </div>
-            <!-- <xsl:apply-templates select="EngagementHistory" />
-            <xsl:apply-templates select="AntiShip" />
-            <xsl:apply-templates select="Strike" />
-            <xsl:apply-templates select="Sensors" />
-            <xsl:apply-templates select="Defenses" />
-            <xsl:apply-templates select="Engineering" /> -->
+            <xsl:apply-templates select="StrikeReport" />
+            <xsl:apply-templates select="SpaceSuperiorityReport" />
         </div>
+</xsl:template>
+
+<xsl:template match="CraftBattleReport" mode="basic-stats">
+        <dl class="basic-stats">
+            <div class="stat craft-carried">
+                <dt>Carried</dt>
+                <dd>
+                    <xsl:value-of select="Carried"></xsl:value-of>
+                </dd>
+            </div>
+            <div class="stat craft-lost">
+                <dt>Lost</dt>
+                <dd>
+                    <xsl:value-of select="Lost"></xsl:value-of>
+                </dd>
+            </div>
+            <div class="stat survival-rate">
+                <dt>Survival&#x00A0;Rate</dt>
+                <dd>
+                    <xsl:value-of  select="format-number((Carried - Lost) div Carried, '###%')"></xsl:value-of>
+                </dd>
+            </div>
+            <div class="stat sorties-flown">
+                <dt>Sorties&#x00A0;Flown</dt>
+                <dd>
+                    <xsl:value-of select="SortiesFlown"></xsl:value-of>
+                </dd>
+            </div>
+            <div class="stat craft-distance-travelled">
+                <dt>Distance&#x00A0;Travelled</dt>
+                <dd>
+                    <xsl:value-of
+                        select="format-number(TotalDistanceTravelled div 100, '###,###.##')"></xsl:value-of>
+                    <xsl:text>&#x00A0;km</xsl:text>
+                </dd>
+            </div>
+            <div class="stat craft-damage-dealt">
+                <dt>Damage&#x00A0;Dealt</dt>
+                <dd>
+                    <xsl:value-of select="format-number(TotalDamageDealt, '###,###')"></xsl:value-of>
+                </dd>
+            </div>
+        </dl>
+</xsl:template>
+
+<xsl:template match="CraftBattleReport" mode="efficiency-ratings">
+        <h4>Overall Efficiency Ratings</h4>
+        <dl class="efficiency-ratings">
+            <div class="stat strike-warfare">
+                <dt>
+                    Strike Warfare
+                </dt>
+                <xsl:call-template name="efficiency-rating-gauge">
+                    <xsl:with-param name="section" select="StrikeReport" />
+                </xsl:call-template>
+            </div>
+            <div class="stat space-superiority">
+                <dt>
+                    Space Superiority
+                </dt>
+                <xsl:call-template name="efficiency-rating-gauge">
+                    <xsl:with-param name="section" select="SpaceSuperiorityReport" />
+                </xsl:call-template>
+            </div>
+        </dl>
+</xsl:template>
+
+<xsl:template match="StrikeReport">
+    <div class="strike breakdown">
+        <h2>
+            Area Breakdown: Strike Warfare -<xsl:text> </xsl:text>
+            <span>
+                <xsl:attribute name="style">
+                    color: <xsl:call-template name="efficiency-color"><xsl:with-param name="efficiency" select="Rating"/></xsl:call-template>
+                </xsl:attribute>
+                <xsl:call-template name="efficiency-label-long"><xsl:with-param name='efficiency' select='Rating' /></xsl:call-template>
+            </span>
+        </h2>
+        <div class="strike weapons">
+            <xsl:apply-templates select="GeneralWeapons/WeaponReport" />
+        </div>
+    </div>
+</xsl:template>
+<xsl:template match="SpaceSuperiorityReport">
+    <div class="space-superiority breakdown">
+        <h2>
+            Area Breakdown: Space Superiority -<xsl:text> </xsl:text>
+            <span>
+                <xsl:attribute name="style">
+                    color: <xsl:call-template name="efficiency-color"><xsl:with-param name="efficiency" select="Rating"/></xsl:call-template>
+                </xsl:attribute>
+                <xsl:call-template name="efficiency-label-long"><xsl:with-param name='efficiency' select='Rating' /></xsl:call-template>
+            </span>
+        </h2>
+        <div class="space-superiority weapons">
+            <xsl:apply-templates select="GeneralWeapons/WeaponReport" />
+        </div>
+    </div>
+</xsl:template>
+
+<xsl:template match="WeaponReport[@xsi:type='CraftMissileReport']">
+    <xsl:variable name="desc">
+        <p>
+        <xsl:value-of select="MissileDesc" disable-output-escaping="yes" />
+        </p>
+    </xsl:variable>
+    <div class="weapon-report missile missile-warfare">
+        <xsl:call-template name="weapon-image">
+            <xsl:with-param name="name" select="MissileBodyKey" />
+        </xsl:call-template>
+        <h3><xsl:value-of select="Name" /></h3>
+        <p class="configuration">
+            <xsl:call-template name="missile-desc">
+                <xsl:with-param name="desc" select="$desc" />
+            </xsl:call-template>
+        </p>
+        <div class="stats">
+            <dl>
+                <div class='half-line'>
+                    <dt>Carried</dt>
+                    <dd><xsl:value-of select="TotalSortied" /></dd>
+                </div>
+                <div class='half-line'>
+                    <dt>Expended</dt>
+                    <dd>
+                        <xsl:value-of select="TotalExpended" />
+                        (<xsl:value-of select="format-number(TotalExpended div TotalSortied, '###%')" />)
+                    </dd>
+                </div>
+                <div class='half-line'>
+                    <dt>Dmg Potential</dt>
+                    <dd><xsl:value-of select="format-number(IndividualDamagePotential * TotalSortied, '###,###,###')" /></dd>
+                </div>
+                <div class='half-line'>
+                    <dt>Actual Dmg</dt>
+                    <dd>
+                        <xsl:value-of select="format-number(TotalDamageDone, '###,###,###')" />
+                        (<xsl:value-of select="format-number(TotalDamageDone div (IndividualDamagePotential * TotalSortied), '###%')" />)
+                    </dd>
+                </div>
+            </dl>
+        </div>
+        <div class="missile-hits">
+            <dl>
+                <dt class="hits">Hits</dt>
+                <dd><xsl:value-of select="Hits" /></dd>
+                <dt class="misses">Misses</dt>
+                <dd><xsl:value-of select="Misses" /></dd>
+                <dt class="softkill">Soft-kills</dt>
+                <dd><xsl:value-of select="Softkills" /></dd>
+                <dt class="hardkill">Hard-kills</dt>
+                <dd><xsl:value-of select="Hardkills" /></dd>
+            </dl>
+        </div>
+    </div>
 </xsl:template>
 
 </xsl:stylesheet>

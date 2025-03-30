@@ -157,12 +157,18 @@ h4 {
     cursor: pointer;
 } */
 
-.ship.details, .craft.details {
+.details {
     cursor: unset;
 }
 
 .ship .stats {
     padding: 1em;
+    flex-basis: 50%;
+    flex-shrink: 0;
+    flex-grow: 1;
+}
+.craft .stats {
+    padding: 0.25em;
     flex-basis: 50%;
     flex-shrink: 0;
     flex-grow: 1;
@@ -207,6 +213,11 @@ h4 {
     justify-content: flex-end;
     font-size: medium;
 }
+
+.details .stat dt {
+    flex-basis: 100%;
+}
+
 /* .craft .summary .stat {
     display: none;
     flex-basis: 100%;
@@ -239,10 +250,6 @@ h4 {
     margin-right: 0.5em;
 }
 
-/* .craft-image-details {
-    flex-basis: 50%;
-    align-self: center;
-} */
 .craft-image-details svg {
     width: 100%;
     height: auto;
@@ -254,35 +261,35 @@ h4 {
     flex-shrink: 1;
 }
 
-.ship.details .summary {
+.details .summary {
     gap: 3%;
     flex-wrap: wrap;
     justify-content: flex-end;
 }
 
-.ship.details .summary .stats dl.basic-stats {
+.details .summary .stats dl.basic-stats {
     gap: 3%;
 }
 
-.ship.details .summary .stat {
+.details .summary .stat {
     flex-basis: 30%;
     display: block;
 }
 
-.ship.details .summary .stat dt {
+.details .summary .stat dt {
     font-size: small;
     margin-top: 0.5em;
     margin-right: 0;
     display: block;
     text-align: left;
 }
-.ship.details .summary .stat dd {
+.details .summary .stat dd {
     font-size: xx-large;
 }
-.ship.details .stats dt::after {
+.details .stats dt::after {
     content: unset;
 }
-.ship.details .stats {
+.details .stats {
     flex-basis: 60%;
     flex-grow: 0;
     flex-shrink: 0;
@@ -334,26 +341,26 @@ h4 {
     flex-shrink: 1;
 }
 
-.ship.details .summary .efficiency-ratings {
+.details .summary .efficiency-ratings {
     column-gap: 10px;
 }
-.ship.details .summary .stats h4 {
+.details .summary .stats h4 {
     border: none;
 }
 
-.ship.details .summary .efficiency-ratings .stat {
+.details .summary .efficiency-ratings .stat {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 100px;
     flex-basis: 100px;
 }
-.ship.details .summary .efficiency-ratings .stat dt {
+.details .summary .efficiency-ratings .stat dt {
     flex-basis: unset;
     text-align: center;
     margin-bottom: 0.75em;
 }
-.ship.details .summary .efficiency-ratings .rating {
+.details .summary .efficiency-ratings .rating {
     width: 100px;
     height: 100px;
     border-radius: 100%;
@@ -383,7 +390,40 @@ h4 {
     order: 5;
 }
 
-.ship.details > div + div {
+/* .craft.details .summary .efficiency-ratings {
+    column-gap: 10px;
+}
+.craft.details .summary .stats h4 {
+    border: none;
+}
+
+.craft.details .summary .efficiency-ratings .stat {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100px;
+    flex-basis: 100px;
+}
+.craft.details .summary .efficiency-ratings .stat dt {
+    flex-basis: unset;
+    text-align: center;
+    margin-bottom: 0.75em;
+}
+.craft.details .summary .efficiency-ratings .rating {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    flex-basis: 100px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    line-height: 100px;
+    text-align: center;
+    font-weight: bolder;
+    font-size: xx-large;
+    display: block;
+} */
+
+.details > .breakdown {
     border-top: solid 6px orangered;
     margin: 0 6px;
     margin-bottom: 1em;
@@ -397,17 +437,17 @@ h4 {
     margin: 2px 0;
 }
 
-.ship.details .breakdown h2 {
+.details .breakdown h2 {
     text-align: left;
 }
 
-.ship.details .breakdown .stats {
+.details .breakdown .stats {
     max-width: 50%;
     padding: 0;
 }
 
 
-.ship.details .breakdown .stats dt::after {
+.details .breakdown .stats dt::after {
     content: ':';
 }
 
@@ -417,7 +457,7 @@ h4 {
     margin-bottom: 0;
 }
 
-.ship.details .breakdown .stats dl {
+.details .breakdown .stats dl {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -425,38 +465,38 @@ h4 {
     margin-top: 0;
 }
 
-.ship.details .breakdown .stats dl * {
+.details .breakdown .stats dl * {
     margin: 0;
 }
 
-.ship.details .breakdown .stats dl dt {
+.details .breakdown .stats dl dt {
     text-align: left;
     flex-shrink: 1;
 }
-.ship.details .breakdown .stats dl dd {
+.details .breakdown .stats dl dd {
     text-align: center;
     flex-grow: 1;
     margin-left: 0.5em;
     margin-right: 1em;
 }
 
-.ship.details .breakdown .stats .own-line {
+.details .breakdown .stats .own-line {
     flex-basis: 100%;
     display: flex;
 }
 
-.ship.details .breakdown .stats dl .own-line dd {
+.details .breakdown .stats dl .own-line dd {
     flex-basis: 40%;
     text-align: left;
 }
 
-/* .craft.details .summary {
+.craft.details .summary {
     gap: 3%;
     flex-wrap: wrap;
     justify-content: flex-end;
 }
 
-.craft.details .summary .stats dl.basic-stats {
+/* .craft.details .summary .stats dl.basic-stats {
     gap: 3%;
 }
 
@@ -477,12 +517,13 @@ h4 {
 }
 .craft.details .stats dt::after {
     content: unset;
-}
+} */
 .craft.details .stats {
     flex-basis: 60%;
     flex-grow: 0;
     flex-shrink: 0;
-} */
+    margin-left: auto;
+}
 
 .own-line dt {
     flex-basis: 60%;
