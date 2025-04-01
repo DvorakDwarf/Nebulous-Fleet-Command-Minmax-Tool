@@ -1237,6 +1237,10 @@
         <xsl:variable name="m30">Stock/S3 Mine</xsl:variable>
         <xsl:variable name="m30net">Stock/S3 Net Mine</xsl:variable>
         <xsl:variable name="m30sprint">Stock/S3 Sprint Mine</xsl:variable>
+        <xsl:variable name="kbu15">Stock/S1 Glide Bomb</xsl:variable>
+        <xsl:variable name="rbu15">Stock/S1 Boosted Bomb</xsl:variable>
+        <xsl:variable name="kbu22">Stock/S2 Glide Bomb</xsl:variable>
+        <xsl:variable name="cbu40">Stock/S3 Cluster Bomb</xsl:variable>
         <xsl:variable name="r2">Stock/S1 Rocket</xsl:variable>
         <xsl:variable name="r3">Stock/S3 Rocket</xsl:variable>
         <xsl:variable name="p20">Stock/P20 Flak PDT</xsl:variable>
@@ -1292,10 +1296,14 @@
                     <xsl:when test="$name = $cm4m">resources/modules/cm4m.svg</xsl:when>
                     <xsl:when test="$name = $cm4">resources/modules/cm4.svg</xsl:when>
                     <!-- Have not verified that cm4-s has the same sprite -->
-                    <xsl:when test="$name = $cm4s">resources/modules/cm4.svg</xsl:when>
+                    <xsl:when test="$name=$cm4s">resources/modules/cm4.svg</xsl:when>
                     <xsl:when test="$name = $m30">resources/modules/m30.svg</xsl:when>
                     <xsl:when test="$name = $m30net">resources/modules/m30.svg</xsl:when>
                     <xsl:when test="$name = $m30sprint">resources/modules/m30.svg</xsl:when>
+                    <xsl:when test="$name = $kbu15">resources/modules/kbu15.svg</xsl:when>
+                    <xsl:when test="$name = $rbu15">resources/modules/rbu15.svg</xsl:when>
+                    <xsl:when test="$name = $kbu22">resources/modules/kbu22.svg</xsl:when>
+                    <xsl:when test="$name = $cbu40">resources/modules/cbu40.svg</xsl:when>
                     <xsl:when test="$name = $r2">resources/modules/r2.svg</xsl:when>
                     <xsl:when test="$name = $r3">resources/modules/r3.svg</xsl:when>
                     <xsl:when test="$name = $p20">resources/modules/p20.svg</xsl:when>
@@ -1320,6 +1328,8 @@
                     <xsl:when test="$name=$cm4r">weapon-image straight</xsl:when>
                     <xsl:when test="$name=$cm4m">weapon-image straight</xsl:when>
                     <xsl:when test="$name=$cm4">weapon-image straight</xsl:when>
+                    <!-- Have not verified that cm4-s has the same sprite -->
+                    <xsl:when test="$name=$cm4s">weapon-image straight</xsl:when>
                     <xsl:when test="$name=$c60">weapon-image straight</xsl:when>
                     <xsl:when test="$name=$c65">weapon-image straight</xsl:when>
                     <xsl:when test="$name=$te45">weapon-image straight</xsl:when>
@@ -1624,13 +1634,13 @@
                 </div>
                 <div class='half-line'>
                     <dt>Dmg Potential</dt>
-                    <dd><xsl:value-of select="format-number(IndividualDamagePotential * TotalSortied, '###,###,###')" /></dd>
+                    <dd><xsl:value-of select="format-number(IndividualDamagePotential * TotalExpended, '###,###,###')" /></dd>
                 </div>
                 <div class='half-line'>
                     <dt>Actual Dmg</dt>
                     <dd>
                         <xsl:value-of select="format-number(TotalDamageDone, '###,###,###')" />
-                        (<xsl:value-of select="format-number(TotalDamageDone div (IndividualDamagePotential * TotalSortied), '###%')" />)
+                        (<xsl:value-of select="format-number(TotalDamageDone div (IndividualDamagePotential * TotalExpended), '###%')" />)
                     </dd>
                 </div>
             </dl>
