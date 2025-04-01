@@ -1233,6 +1233,7 @@
         <xsl:variable name="cm4r">Stock/Rocket Container</xsl:variable>
         <xsl:variable name="cm4m">Stock/Mine Container</xsl:variable>
         <xsl:variable name="cm4">Stock/CM-4 Body</xsl:variable>
+        <xsl:variable name="cm4s">Stock/CM-S-4 Body</xsl:variable>
         <xsl:variable name="m30">Stock/S3 Mine</xsl:variable>
         <xsl:variable name="m30net">Stock/S3 Net Mine</xsl:variable>
         <xsl:variable name="m30sprint">Stock/S3 Sprint Mine</xsl:variable>
@@ -1290,6 +1291,8 @@
                     <xsl:when test="$name = $cm4r">resources/modules/cm4r.svg</xsl:when>
                     <xsl:when test="$name = $cm4m">resources/modules/cm4m.svg</xsl:when>
                     <xsl:when test="$name = $cm4">resources/modules/cm4.svg</xsl:when>
+                    <!-- Have not verified that cm4-s has the same sprite -->
+                    <xsl:when test="$name = $cm4s">resources/modules/cm4.svg</xsl:when>
                     <xsl:when test="$name = $m30">resources/modules/m30.svg</xsl:when>
                     <xsl:when test="$name = $m30net">resources/modules/m30.svg</xsl:when>
                     <xsl:when test="$name = $m30sprint">resources/modules/m30.svg</xsl:when>
@@ -1405,8 +1408,8 @@
     <xsl:template match="CraftBattleReport">
         <div class="craft">
             <xsl:attribute name="data-ship-id">
-                <xsl:value-of select="../../PlayerID"></xsl:value-of>-C-<xsl:value-of select="position()"></xsl:value-of>
-                <!-- <xsl:value-of select="../../PlayerID"></xsl:value-of>-<xsl:value-of select="count(../ShipBattleReport[. = current()]/preceding-sibling::*)+count(../CraftBattleReport[. = current()]/preceding-sibling::*)+1"></xsl:value-of> -->
+                <!-- <xsl:value-of select="../../PlayerID"></xsl:value-of>-C-<xsl:value-of select="position()"></xsl:value-of> -->
+                <xsl:value-of select="../../PlayerID"></xsl:value-of>-C-<xsl:value-of select="count(../ShipBattleReport[. = current()]/preceding-sibling::*)+count(../CraftBattleReport[. = current()]/preceding-sibling::*)+1"></xsl:value-of>
             </xsl:attribute>
             <h4>
                 <xsl:value-of select="DesignName"></xsl:value-of>
@@ -1454,8 +1457,8 @@
     <xsl:template match="CraftBattleReport" mode="details">
         <div>
             <xsl:attribute name="data-ship-id">
-                <xsl:value-of select="../../PlayerID"></xsl:value-of>-C-<xsl:value-of select="position()"></xsl:value-of>
-                <!-- <xsl:value-of select="../../PlayerID"></xsl:value-of>-<xsl:value-of select="count(../ShipBattleReport[. = current()]/preceding-sibling::*)+count(../CraftBattleReport[. = current()]/preceding-sibling::*)+1"></xsl:value-of> -->
+                <!-- <xsl:value-of select="../../PlayerID"></xsl:value-of>-C-<xsl:value-of select="position()"></xsl:value-of> -->
+                <xsl:value-of select="../../PlayerID"></xsl:value-of>-C-<xsl:value-of select="count(../ShipBattleReport[. = current()]/preceding-sibling::*)+count(../CraftBattleReport[. = current()]/preceding-sibling::*)+1"></xsl:value-of>
                 <!-- <xsl:value-of select="../../PlayerID"></xsl:value-of>-<xsl:value-of select="position()"></xsl:value-of> -->
             </xsl:attribute>
             <xsl:attribute name="class">
