@@ -1216,6 +1216,8 @@
         <xsl:variable name="sgm3">Stock/SGT-3 Body</xsl:variable>
         <xsl:variable name="sgm2">Stock/SGM-2 Body</xsl:variable>
         <xsl:variable name="sgmh2">Stock/SGM-H-2 Body</xsl:variable>
+        <xsl:variable name="sdm1">Stock/SDM-1 Body</xsl:variable>
+        <xsl:variable name="sdm2">Stock/SDM-2 Body</xsl:variable>
         <xsl:variable name="mk68">Stock/Mk68 Cannon</xsl:variable>
         <xsl:variable name="mk610">Stock/Mk610 Beam Turret</xsl:variable>
         <xsl:variable name="mk600">Stock/Mk600 Beam Cannon</xsl:variable>
@@ -1278,6 +1280,8 @@
                     <xsl:when test="$name = $sgm3">resources/modules/sgm3.svg</xsl:when>
                     <xsl:when test="$name = $sgm2">resources/modules/sgm2.svg</xsl:when>
                     <xsl:when test="$name = $sgmh2">resources/modules/sgm-h-2.svg</xsl:when>
+                    <xsl:when test="$name = $sdm1">resources/modules/sdm1.svg</xsl:when>
+                    <xsl:when test="$name = $sdm2">resources/modules/sdm2.svg</xsl:when>
                     <xsl:when test="$name = $mk68">resources/modules/mk68.svg</xsl:when>
                     <xsl:when test="$name = $mk610">resources/modules/mk610.svg</xsl:when>
                     <xsl:when test="$name = $mk600">resources/modules/mk600.svg</xsl:when>
