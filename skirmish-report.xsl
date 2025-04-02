@@ -556,7 +556,7 @@
     </xsl:template>
     <xsl:template match="EnemyEngagement">
         <p class="engagement">
-            <xsl:value-of select="normalize-space(Name)" /> - Last TN <xsl:value-of select="TN/@ID"/>
+            <xsl:value-of select="substring(normalize-space(Name), 10, string-length(Name)-19)" /> - Last TN <xsl:value-of select="TN/@ID"/>
             <xsl:choose>
                 <xsl:when test="EndingStatus = 'NotEliminated'"></xsl:when>
                 <xsl:when test="EndingStatus = 'Destroyed'"> - DESTROYED</xsl:when>
