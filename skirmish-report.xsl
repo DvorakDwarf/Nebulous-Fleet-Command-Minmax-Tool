@@ -556,6 +556,7 @@
     </xsl:template>
     <xsl:template match="EnemyEngagement">
         <p class="engagement">
+            <!-- This is a convoluted one-liner but idk how to get rid of the fake noparse tag otherwise -->
             <xsl:value-of select="substring(normalize-space(Name), 10, string-length(Name)-19)" /> - Last TN <xsl:value-of select="TN/@ID"/>
             <xsl:choose>
                 <xsl:when test="EndingStatus = 'NotEliminated'"></xsl:when>
