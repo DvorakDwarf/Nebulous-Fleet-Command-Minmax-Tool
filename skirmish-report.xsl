@@ -1547,7 +1547,7 @@
             <div class="stat craft-damage-dealt">
                 <dt>Damage&#x00A0;Dealt</dt>
                 <dd>
-                    <xsl:value-of select="format-number(TotalDamageDealt, '###,###')"></xsl:value-of>
+                    <xsl:value-of select="format-number(TotalDamageDealt, '###,###')"></xsl:value-of>HP
                 </dd>
             </div>
         </dl>
